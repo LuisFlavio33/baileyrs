@@ -1,0 +1,209 @@
+{
+  "name": "Flow N8N",
+  "nodes": [
+    {
+      "parameters": {},
+      "name": "Start",
+      "type": "n8n-nodes-base.start",
+      "typeVersion": 1,
+      "position": [
+        40,
+        300
+      ]
+    },
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "d0e2da4e-9f98-4fc1-a2df-6393003fe934",
+        "options": {}
+      },
+      "name": "Webhook",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        260,
+        300
+      ],
+      "webhookId": "d0e2da4e-9f98-4fc1-a2df-6393003fe934"
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://localhost:8001/zdg-message",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\"jid\":\"{{$node[\"Webhook\"].json[\"body\"][\"key\"][\"remoteJid\"]}}\",\"message\":\"oi\"}"
+      },
+      "name": "Mensagem de Texto",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        780,
+        -180
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://localhost:8001/zdg-video",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\"jid\":\"{{$node[\"Webhook\"].json[\"body\"][\"key\"][\"remoteJid\"]}}\",\"caption\":\"vídeo\",\"url\":\"./assets/zdg.mp4\"}"
+      },
+      "name": "Vídeo",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        880,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://localhost:8001/zdg-imagem",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\"jid\":\"{{$node[\"Webhook\"].json[\"body\"][\"key\"][\"remoteJid\"]}}\",\"caption\":\"imagem\",\"url\":\"./assets/card.jpg\"}"
+      },
+      "name": "Imagem",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        940,
+        180
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://localhost:8001/zdg-audio",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\"jid\":\"{{$node[\"Webhook\"].json[\"body\"][\"key\"][\"remoteJid\"]}}\",\"url\":\"./assets/audio.mp3\"}"
+      },
+      "name": "Áudio",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        940,
+        380
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://localhost:8001/zdg-record",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\"jid\":\"{{$node[\"Webhook\"].json[\"body\"][\"key\"][\"remoteJid\"]}}\",\"url\":\"./assets/record.ogg\"}"
+      },
+      "name": "Record",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        900,
+        580
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://localhost:8001/zdg-vcard",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\"jid\":\"{{$node[\"Webhook\"].json[\"body\"][\"key\"][\"remoteJid\"]}}\",\"name\":\"Nome do Contato\",\"cel\":\"+55 35 988754197\",\"wid\":\"553588754197@s.whatsapp.net\"}"
+      },
+      "name": "VCard",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        820,
+        760
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://localhost:8001/zdg-list",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\"jid\":\"{{$node[\"Webhook\"].json[\"body\"][\"key\"][\"remoteJid\"]}}\",\"title\":\"Título da Lista\",\"footer\":\"© Comunidade ZDG\",\"description\":\"Descrição ZDG\",\"button\":\"Botão ZDG\",\"sectionTitle\":\"Sessão ZDG\",\"title1\":\"Título 1\",\"title2\":\"Título 2\",\"title3\":\"Título 3\",\"description1\":\"Descrição 1\",\"description2\":\"Descrição 2\",\"description3\":\"Descrição 3\"}"
+      },
+      "name": "Lista",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        620,
+        -340
+      ]
+    },
+    {
+      "parameters": {
+        "requestMethod": "POST",
+        "url": "http://localhost:8001/zdg-button",
+        "jsonParameters": true,
+        "options": {},
+        "bodyParametersJson": "={\"jid\":\"{{$node[\"Webhook\"].json[\"body\"][\"key\"][\"remoteJid\"]}}\",\"title\":\"Título da Lista\",\"footer\":\"© Comunidade ZDG\",\"description\":\"Descrição ZDG\",\"ZDGBtn1\":\"Botão ZDG 1\",\"ZDGBtn2\":\"Botão ZDG 2\",\"ZDGBtn3\":\"Botão ZDG 3\"}"
+      },
+      "name": "Botão",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 1,
+      "position": [
+        660,
+        960
+      ]
+    }
+  ],
+  "connections": {
+    "Webhook": {
+      "main": [
+        [
+          {
+            "node": "Vídeo",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Mensagem de Texto",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Imagem",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Áudio",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Record",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "VCard",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Lista",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "Botão",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": false,
+  "settings": {},
+  "id": 14
+}
